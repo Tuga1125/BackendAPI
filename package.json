@@ -1,0 +1,23 @@
+{
+  "name": "t2-backendapi-Tuga1125",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwarica-github/t2-backendapi-Tuga1125.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/softwarica-github/t2-backendapi-Tuga1125/issues"
+  },
+  "homepage": "https://github.com/softwarica-github/t2-backendapi-Tuga1125#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
