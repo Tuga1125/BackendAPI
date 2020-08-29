@@ -5,6 +5,8 @@ const path= require('path');
 require('dotenv').config();
 
 const userRouter =  require('./routes/userRouter');
+const fooditemRouter =  require('./routes/fooditemRouter');
+    
 const app = express();
 
 
@@ -29,6 +31,7 @@ mongoose.connect(process.env.DbURI,{
    });
    
    app.use('/api/users', userRouter);
+   app.use('/api/fooditem', fooditemRouter);
    
    app.use((req,res, next)=> {
        let err = new Error('not found');
