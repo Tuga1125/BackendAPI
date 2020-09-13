@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../module/User');
 const jwt = require('jsonwebtoken');
+const Auth = require('../auth');
 
 const validation = require('../validation');
 
@@ -50,7 +51,7 @@ router.post('/register', (req, res, next) => {
                         return next(err);
                     }
                     let payload = {
-                        id: user.id,
+                        userid: user.userid,
                         username: user.username,
                         firstname: user.firstname,
                         lastname: user.lastname,
@@ -63,6 +64,7 @@ router.post('/register', (req, res, next) => {
                         }
                         res.json({
                             status: 'Login Sucessful',
+                            //  _id:user._id,
                             token: `Bearer ${token}`
                         });
                     });
@@ -72,5 +74,36 @@ router.post('/register', (req, res, next) => {
             }).catch(next);
         
         })
+
+        // router.put('/update/:userid', Auth.verifyUser, (req, res, next) => {
+        //     User.findByIdAndUpdate(req.userid, { $set: req.body }, { new: true })
+        //         .then((user) => {
+        //             res.json({ _id: user._id, username: user.username, email: user.email, password:user.password,  firstname: req.user.firstname, lastname: req.user.lastname});
+        //         }).catch(next);
+        // });
+        router.put('/update/:userid', function(req, res){
+            users.findOneAndUpdate({_id :req.params.userid}, req.body).then(function(){
+                res.send("Account updated!")
+            }).catch(function(){ 
+                res.send("error")
+            }) 
+            })
+    
+
+        router.delete('/delete/:userid', function(req, res){
+            console.log(req.params.userid);
+            users.findByIdAndDelete(req.params.userid).then(function(){
+                res.send("User has been deleted.")
+            }).catch(function(){ 
+                res.send(e)
+            })
+            })
+
+        // router.put('/update/:userid', (req, res, next) => {
+        //     userid.findByIdAndUpdate(req.params.userid,{$set: req.body},{new: true})
+        //     .then(upd => {
+        //         res.json(upd);
         
+        //     }).catch(next);
+        // })
         module.exports = router;

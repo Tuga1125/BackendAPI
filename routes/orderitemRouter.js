@@ -1,51 +1,51 @@
 const express = require('express');
 const router = express.Router();
-//const { update } = require('../module/fooditem');
-const Fooditem = require('../module/Fooditem');
+const Orderitem = require('../module/Orderitem');
 
 router.route('/')
 .get((req, res, next) =>{
-    Fooditem.find(req.params.fooditemid)
-    .then((fooditem) => {
-        res.json(fooditem);
+    Orderitem.find(req.params.orderitemid)
+    .then((orderitem) => {
+        res.json(orderitem);
     }).catch(next);
 })
 
 .post((req, res, next) => {
-          Fooditem.create(req.body)
-              .then((fooditem) => {
-                  res.status(201).json(fooditem);
+          Orderitem.create(req.body)
+              .then((orderitem) => {
+                  res.status(201).json(orderitem);
               }).catch(next);
     })
   
     .delete((req, res, next) => {
-        Fooditem.deleteMany()
+        Orderitem.deleteMany()
         .then(reply => {
             res.json(reply);
         }).catch(next);
     })
 
-router.route('/:fooditemid')
+router.route('/:orderitemid')
    .get((req, res, next) => {
-       Fooditem.findById(req.params.fooditemid)
+       Orderitem.findById(req.params.orderitemid)
             .then(items => {
                  res.json(items);
             }).catch(next);
     })
 
     .delete((req, res, next) => {
-        Fooditem.deleteOne({_id: req.params.fooditemid})
+        Orderitem.deleteOne({_id: req.params.orderitemid})
         .then(replay => {
             res.json(replay);
         }).catch(next);
     })
     .put((req, res, next) => {
-        Fooditem.findByIdAndUpdate(req.params.fooditemid,{$set: req.body},{new: true})
+        Orderitem.findByIdAndUpdate(req.params.orderitemid,{$set: req.body},{new: true})
         .then(upd => {
             res.json(upd);
     
         }).catch(next);
     })
     module.exports = router;
+
 
 
