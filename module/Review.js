@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 
 const reviewSchema = mongoose.Schema({
     
-    displayName: {
+    foodname: {
         type: String,
         required: true
       },
-      restaurantName: {
-        type: String,
-        required: true
-      },
+  
     comment : {
         type: String,
         required: true
