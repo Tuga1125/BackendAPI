@@ -2,11 +2,12 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../module/User');
 const jwt = require('jsonwebtoken');
-const auth = require('./auth');
+const auth = require('../routes/auth');
 
 const validation = require('../validation');
 
 const router = express.Router();
+
 
 router.post('/register', (req, res, next) => {
    const {errors, isValid} = validation.registerInput(req.body);
@@ -81,13 +82,21 @@ router.post('/register', (req, res, next) => {
         //             res.json({ _id: user._id, username: user.username, email: user.email, password:user.password,  firstname: req.user.firstname, lastname: req.user.lastname});
         //         }).catch(next);
         // });
-        router.put('/update/:userid', function(req, res){
-            users.findOneAndUpdate({_id :req.params.userid}, req.body).then(function(){
-                res.send("Account updated!")
-            }).catch(function(){ 
-                res.send("error")
-            }) 
-            })
+        router.put("/:userid", update);
+        function update(req, res, next) {
+            userService
+              .update(req.params.userid, req.body)
+              .then(() => res.json({}))
+              .catch(err => next(err));
+          }
+          
+        // router.put('/update/:userid', function(req, res){
+        //     users.findOneAndUpdate({_id :req.params.userid}, req.body).then(function(){
+        //         res.send("Account updated!")
+        //     }).catch(function(){ 
+        //         res.send("error")
+        //     }) 
+        //     })
     
 
         router.delete('/delete/:userid', function(req, res){
